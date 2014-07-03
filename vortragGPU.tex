@@ -1,0 +1,255 @@
+\documentclass{beamer}
+\usepackage{beamerthemelined} 
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{listings}
+\usepackage{graphicx}
+\usepackage{epstopdf}
+
+\setbeamertemplate{footline}[frame number]
+
+\lstdefinestyle{customc}{
+  belowcaptionskip=1\baselineskip,
+  breaklines=true,
+  frame=L,
+  xleftmargin=\parindent,
+  language=C,
+  showstringspaces=false,
+  basicstyle=\footnotesize\ttfamily,
+  keywordstyle=\bfseries\color{green!40!black},
+  commentstyle=\itshape\color{purple!40!black},
+  identifierstyle=\color{blue},
+  stringstyle=\color{orange},
+}
+
+%\usepackage{ stmaryrd }
+
+%\usetheme{Boadilla} % Pretty neat, soft color.
+%\usetheme{default}
+%\usetheme{Warsaw}
+%\usetheme{Bergen} % This template has nagivation on the left
+%\usetheme{Frankfurt} % Similar to the default 
+%with an extra region at the top.
+%\usecolortheme{seahorse} % Simple and clean template
+%\usetheme{Darmstadt} % not so good
+% Uncomment the following line if you want %
+% page numbers and using Warsaw theme%
+ %\setbeamertemplate{footline}[page number]
+%\setbeamercovered{transparent}
+\setbeamercovered{invisible}
+% To remove the navigation symbols from 
+% the bottom of slides%
+\setbeamertemplate{navigation symbols}{} 
+%
+
+\usepackage{graphicx}
+%\usepackage{bm}         % For typesetting bold math (not \mathbold)
+%\logo{\includegraphics[height=0.6cm]{yourlogo.eps}}
+%
+\title[Dataparallel Programming on GPUs]{Dataparallel Programming on GPUs}
+\author{Daniel Rembold, Maximillian Scholz}
+\institute[TUHH]
+{
+Technische Universit{\"a}t Hamburg Harburg \\
+\medskip
+{\emph{daniel.rembold@tuhh.de , maximillian.scholz@tuhh.de}}
+}
+\date{\today}
+% \today will show current date. 
+% Alternatively, you can specify a date.
+%
+
+
+\begin{document}
+\renewcommand{\figurename}{Abbildung}
+%
+\begin{frame}
+\titlepage
+\end{frame}
+%
+
+\begin{frame}
+\frametitle{Inhaltsverzeichnis}
+
+\begin{enumerate}
+		\item Aufgabenstellung \\
+
+	      	\item Einfache Implentierung \\
+	      	
+	      	\item NVIDIA-Template   \\ 
+	      		
+	      	\item Optimierung  \\ 
+	  
+	      	\item Laufzeit- und Performancemessung \\
+
+		\item Fazit
+\end{enumerate}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% BEGIN INTRODUCTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Aufgabenstellung}
+
+\begin{frame}
+\frametitle{Aufgabenstellung}
+
+M\"oglichst effiziente Implementierung einer Matrixmultiplikation in row-major und column-major Format .\newline
+
+Quadratische Matrizen der Dimension $32 * k , k \in \{ 1,2,4,\dots,128 \} $ 
+
+
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Einfache Implentierung}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]
+\frametitle{Naiver Algoritmus}
+
+C-Code f\"ur die CPU .. keine Parallelit\"at
+
+\begin{lstlisting}[style=customc,caption=Matrixmultiplication in C]
+int i,j,k;
+
+for( i = 0, i<Ndim; i++){
+  for( j = 0, j<Mdim;j++){
+    for( k = 0; k<Pdim; k++){
+      C[i*Ndim+j] += A[i*Ndim+k] * B[k*Pdim+j]; 
+    }
+  }
+}
+\end{lstlisting}
+
+
+
+\end{frame}
+
+
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+
+\begin{frame}[fragile]
+\frametitle{Einfache Implementierung}
+ 
+Einfache Implementierung in OpenCL
+\begin{lstlisting}[style=customc,caption=Simplecode]
+int i,j,k;
+i = global_id(0);
+j = global_id(1);
+  for(k=0; k<Pdim; k++){
+    C[i*Ndim+j] += A[i*Ndim+k] * B[k*Pdim+j]; 
+  }
+\end{lstlisting}
+
+
+%TODO Laufzeiten hier hochladen!
+
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% % % % % % % % % %  % %  % % %  % % % %  % %%  % % %  
+
+\section{NVIDIA-Template}
+\begin{frame}
+\frametitle{NVIDIA-Template}
+
+Zerlegung der Matrix in Bl\"ocken \\
+
+Verwendung von lokalem Speicher \\
+
+%TODO Code snippet hochladen
+
+%TODO Laufzeitmessung hochladen abh. von Blockgröße
+ 
+
+\end{frame}
+
+
+
+\section{Optimierung}
+\begin{frame}
+\frametitle{Supermulti}
+
+Weniger Threads, aber mehr Arbeit pro Thread -> Mehr Output pro Thread \\
+
+Werte werden in Threads wiederverwendet
+
+%TODO: Codesnippet hochladen 
+
+\end{frame}
+
+\section{Laufzeit- und Performancemessung}
+\begin{frame}
+\frametitle{Laufzeitmessung auf ATI und NVIDIA}
+ %TODO MATLAB hochladen
+\end{frame}
+
+\begin{frame}
+\frametitle{Performancemessung auf ATI und NVIDIA}
+ %TODO MATLAB hochladen
+	%\begin{figure}[c]
+	%\includegraphics[width=12cm]{./Bilder/performance.eps}
+	%\caption{PERFORMANZE}
+	%\end{figure}
+\end{frame}
+
+
+\section{Fazit}
+\begin{frame}
+\frametitle{Begründung der Ergebnisse und m\"ogl. Verbesserungen}
+
+ 
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Quellen}
+%TODO Quellen vollmachen
+\footnotesize{
+\begin{thebibliography}{99}
+ \bibitem[Label1, 2010]{key1} Julien Arino, Jonathan R.Davis, David Hartley, Richard Jordan (2005)
+ \newblock A multi-species epidemic model with spatial dynamics.
+ \newblock \emph{Mathematical Medicine and Biology} 22, 129 -- 142.
+\end{thebibliography}
+}
+
+
+\footnotesize{
+\begin{thebibliography}{99}
+ \bibitem[Label1, 2010]{key1} Jan W. Pr{\"u}ss,
+ Roland Schnaubelt, Rico Zacher (2008)
+ \newblock Mathematische Modelle
+ in der Biologie - Deterministische homogene Systeme.
+ \newblock ISBN 978-3-7643-8436-4
+\end{thebibliography}
+}
+
+
+\end{frame}
+ 
+ 
+ 
+\begin{frame}
+\centerline{Vielen Dank f{\"u}r eure Aufmerksamkeit!}
+\end{frame}
+% End of slides
+\end{document}

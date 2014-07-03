@@ -1,0 +1,7 @@
+# PCTeX Project File, Version 1.1
+	name: folien
+	texformat: latex
+	typesetmode: PDF
+	spellwordlist: american
+folien.tex
+folien.log

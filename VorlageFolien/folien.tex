@@ -1,0 +1,172 @@
+\documentclass[mathserif,9pt]{beamer}
+%\usepackage{setspace}
+\usepackage[ruled,linesnumbered,vlined]{algorithm2e} % 
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{xcolor}
+\usepackage{verbatim}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{listings}
+%\usepackage[round,sort]{natbib}
+%\newcommand{\newblock}{} % for natbib
+\usepackage{enumerate}
+\usepackage[citetracker=true,citestyle=alphabetic, style=verbose,backend=bibtex]{biblatex} 
+
+\usepackage{multirow}
+%\usepackage{tikz}
+
+\addbibresource{bib}
+
+\usetikzlibrary{matrix}
+\usetikzlibrary{arrows}
+\usetikzlibrary{fit}
+
+
+\renewcommand{\footnotesize}{\tiny}
+
+\numberwithin{figure}{section}
+\numberwithin{equation}{section}
+
+\SetAlFnt{\small}
+\SetAlCapFnt{\small}
+
+
+\lstset{ %
+  language=C++,                % the language of the code
+  basicstyle=\small,  % the size of the fonts that are used for the code
+  numbersep=5pt,                  % how far the line-numbers are from the code
+  frame=none,                   % adds a frame around the code
+  tabsize=2,                      % sets default tabsize to 2 spaces  
+  breakatwhitespace=false,        % sets if automatic breaks should only happen at whitespace
+  title=\lstname,                   % show the filename of files included
+  keywordstyle=\small\color{blue}\bfseries,
+  numberstyle=\tiny\color{black},        % line number style
+  commentstyle=\tiny\color{teal},       % comment style
+  stringstyle=\color{mauve},         % string literal style
+  escapeinside={\%*}{*)},            % if you want to add a comment within your code
+  aboveskip=0pt,
+  belowskip=15pt, 
+  abovecaptionskip=0pt, 
+  belowcaptionskip=0pt,
+  columns=fullflexible%,
+  %morekeywords={void,size_t,static_assert,...} % add more keywords
+}
+
+\beamertemplatenavigationsymbolsempty
+\addtobeamertemplate{footnote}
+%\setbeamertemplate{caption}[numbered]
+
+
+
+\DeclareGraphicsExtensions{.pdf,.png,.jpg,.jpeg}
+%\usecolortheme{beetle}
+%\usecolortheme{seagull}
+%\usecolortheme{fly}
+\usecolortheme{lily}
+%\usecolortheme{whale}
+\useoutertheme{infolines}
+
+%\usetheme{Madrid}
+%\usetheme{Bergen}
+\usetheme{Boadilla}
+\usefonttheme{serif}
+\usefonttheme{structuresmallcapsserif}
+
+
+
+\makeatletter
+%\setbeamertemplate{frametitle}
+%{%
+%\vspace{\beamer@headheight}
+%
+%\begin{beamercolorbox}[wd=\paperwidth,dp=0ex, ht=4ex, sep=0.0ex, colsep*=0pt]{frametitle}%
+%\raisebox{-1ex}[0pt][0pt]{\includegraphics[height=5ex]{figures/ictlogo.png}}%
+%\hfill
+%\makebox(100,20){
+%\usebeamerfont{frametitle}%
+%\insertframetitle%  \hfill%\strut 
+%}
+%\hfill
+%\raisebox{1ex}[0pt][0pt]{\includegraphics[height=2ex]{figures/tuhh.png}}%
+%\end{beamercolorbox}%
+%}%
+\makeatother
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Definitions for the presentation
+\titlegraphic{
+\makebox(200,40){
+\includegraphics[width=2cm]{figures/ictlogo.png}
+}
+\makebox(200,40){
+\includegraphics[width=4cm]{figures/tuhh.png}
+}
+}
+
+
+
+\title[Untertitel]{Titel}
+%\subtitle{}
+\author[Autor]{Autor}
+\institute[ICT]{Institute of Computer Technology}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\makeatletter
+\setbeamertemplate{title page}
+{
+  %\vbox{}
+  %\vfill
+  \begin{centering}
+  \makebox(200,80){{\usebeamercolor[fg]{titlegraphic}\inserttitlegraphic\par}}
+    \begin{beamercolorbox}[sep=8pt,center]{title}
+      \usebeamerfont{title}\inserttitle
+      \vskip0.25em
+      {\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle\par}
+    \end{beamercolorbox}
+    \vskip1em\par
+    \begin{beamercolorbox}[sep=8pt,center]{author}
+      \usebeamerfont{author}\insertauthor
+    \end{beamercolorbox}
+    \vskip-1em\par % change here
+    \begin{beamercolorbox}[sep=8pt,center]{institute}
+      \usebeamerfont{institute}\insertinstitute
+    \end{beamercolorbox}
+    \begin{beamercolorbox}[sep=8pt,center]{date}
+      \usebeamerfont{date}\insertdate
+    \end{beamercolorbox}\vskip0.5em
+  \end{centering}
+  \vfill
+}
+\makeatother
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\titlepage
+
+% The second page is the table of contents
+\frame{
+	\frametitle{Overview}
+	\tableofcontents%[hidesubsections]
+}
+
+\input{chapters/intro}
+
+\input{chapters/basics}
+
+\input{chapters/trafo}
+
+%\input{chapters/ops}
+
+%\input{chapters/res}
+
+%\input{chapters/conc}
+
+\end{document}
+
+
