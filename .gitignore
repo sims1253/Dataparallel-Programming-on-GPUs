@@ -47,3 +47,9 @@ vortragGPU.aux
 vortragGPU.aux
 vortragGPU.log
 vortragGPU.nav
+*.out
+*.snm
+*.vrb
+SimpleTime-eps-converted-to.pdf
+Stud4Performance-eps-converted-to.pdf
+Stud4Time-eps-converted-to.pdf
