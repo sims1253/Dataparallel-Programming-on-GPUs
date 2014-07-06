@@ -20,6 +20,7 @@
   commentstyle=\itshape\color{purple!40!black},
   identifierstyle=\color{blue},
   stringstyle=\color{orange},
+  tabsize=2,
 }
 
 %\usepackage{ stmaryrd }
@@ -102,8 +103,17 @@ Technische Universit{\"a}t Hamburg Harburg \\
 M\"oglichst effiziente Implementierung einer Matrixmultiplikation in row-major und column-major Format 
 
 \item
-Quadratische Matrizen der Dimension $32 * k , k \in \{ 1,2,4,\dots,128 \} $ 
+Matrizen \textbf{A = B * C}, $\textbf{A}~\in \mathbb{F}^{m \times k}$, $\textbf{B}~\in \mathbb{F}^{k \times n}$ und $\textbf{C}~\in \mathbb{F}^{m \times n}$ mit $m,n,k \in \{ 32 * i , i \in \{ 1,2,4,\dots,128 \}\} $
+
+
 \end{itemize}
+
+
+Zur Verf\"ugung stehen : 
+\begin{enumerate}
+\item Nvidia Tesla C 2050, Peak performance : 1030 GFLOPS
+\item Ati Radeon HD 7970, Peak performance :  3788.8 GFLOPS
+\end{enumerate}
 
 
 
@@ -149,8 +159,11 @@ for( i = 0, i<Ndim; i++){
 
 \begin{frame}[fragile]
 \frametitle{Einfache Implementierung}
- 
-Einfache Implementierung in OpenCL
+
+\begin{itemize}
+\item Einfache Implementierung in OpenCL
+\end{itemize}
+
 \begin{lstlisting}[style=customc,caption=Einfachster Code in OpenCL]
 int i,j,k;
 i = global_id(0);
@@ -204,7 +217,6 @@ int ty = get_local_id(1); // Threadindey y
 \end{lstlisting}
 
 
-%TODO Laufzeitmessung hochladen abh. von Blockgröße
 
 \end{frame}
 
@@ -212,16 +224,19 @@ int ty = get_local_id(1); // Threadindey y
 
 \begin{frame}[fragile]
 \begin{lstlisting}[style=customc,caption=NVIDIA-Snippet(2)]
-__local T As[16][16];__local T Bs[16][16]; T Csub = 0.0f;
+#define BLOCK_SIZE 16
+__local T As[BLOCK_SIZE][BLOCK_SIZE];
+__local T Bs[BLOCK_SIZE][BLOCK_SIZE]; 
+T Csub = 0.0f;
 for (int a = aBegin, b = bBegin; a <= aEnd; a += aStep, b += bStep){ 
-	As[ty][tx] = A[a + ty + hA * tx];
-	Bs[ty][tx] = B[b + ty + hA * tx];
-	barrier(CLK_LOCAL_MEM_FENCE);
-		for (int k = 0; k < 16; ++k)Csub += As[ty][k] * Bs[k][tx];
-		}
-    barrier(CLK_LOCAL_MEM_FENCE);
+  As[ty][tx] = A[a + ty + hA * tx];
+  Bs[ty][tx] = B[b + ty + hA * tx];
+  barrier(CLK_LOCAL_MEM_FENCE);
+    for (int k = 0; k < BLOCK_SIZE; ++k)
+       Csub += As[ty][k] * Bs[k][tx];
+  barrier(CLK_LOCAL_MEM_FENCE);
 }
-int c = 16 * ( by + hA* bx):
+int c = BLOCK_SIZE * ( by + hA* bx):
 C[c + hA * tx + ty] = Csub;
 \end{lstlisting}
 
@@ -236,22 +251,23 @@ C[c + hA * tx + ty] = Csub;
 
 \begin{itemize}
 \item
-Anzahl der Threadblocks werden verringert, Anzahl der Blocks bleiben
+Anzahl der Threadblocks werden verringert, Anzahl der Blocks bleiben 
 \item
 Halb so viele Threads, jedoch doppelt so viel Arbeit pro Thread
 \end{itemize}
 
+% lokal wurde vergrößert
 
 \begin{lstlisting}[style=customc,caption=Optimized Code in OpenCL]
 T Csub[2] = {0,0};
- __local T As[BLOCK_SIZE][BLOCK_SIZE]; 
- __local T Bs[BLOCK_SIZE][BLOCK_SIZE]; 
+ __local T As[32][32]; 
+ __local T Bs[32][32]; 
 for (int a = aBegin, b = bBegin; a <= aEnd;a += aStep, b+=bStep){ 
-	AS(ty, tx) = A[a + wA * ty + tx]; 
-	BS(ty, tx) = B[b + wB * ty + tx]; 
-	AS(ty+16, tx) = A[a + wA * (ty+16) + tx]; 
-	BS(ty+16, tx) = B[b + wB * (ty+16) + tx]; 
-	barrier(CLK_LOCAL_MEM_FENCE); // sync threads
+     AS(ty, tx) = A[a + wA * ty + tx]; 
+     BS(ty, tx) = B[b + wB * ty + tx]; 
+     AS(ty+16, tx) = A[a + wA * (ty+16) + tx]; 
+     BS(ty+16, tx) = B[b + wB * (ty+16) + tx]; 
+     barrier(CLK_LOCAL_MEM_FENCE); // sync threads
 }
 \end{lstlisting}
 
@@ -263,13 +279,13 @@ for (int a = aBegin, b = bBegin; a <= aEnd;a += aStep, b+=bStep){
 \begin{frame}[fragile]
 \frametitle{Optimierung}
 \begin{lstlisting}[style=customc,caption=innere Schleife und Output]
-for (int k = 0; k < BLOCK_SIZE; ++k){ 
-	Csub[0] += AS(ty, k) * BS(k, tx); 
-	Csub[1] += AS(ty+16, k) * BS(k, tx); 
+  for (int k = 0; k < 16; ++k){ 
+    Csub[0] += AS(ty, k) * BS(k, tx); 
+    Csub[1] += AS(ty+16, k) * BS(k, tx); 
+  } 
+  barrier(CLK_LOCAL_MEM_FENCE); // sync threads
 } 
-barrier(CLK_LOCAL_MEM_FENCE); // sync threads
-} 
-int c = wB * BLOCK_SIZE * by + BLOCK_SIZE * bx; 
+int c = 16 * (wB * by + bx);
 C[c + wB * ty + tx] = Csub[0]; 
 C[c + wB * (ty+16) + tx] = Csub[1]; 
 \end{lstlisting}
@@ -279,7 +295,7 @@ C[c + wB * (ty+16) + tx] = Csub[1];
 \item
 Daten aus dem lokalen Speicher werden wiederverwendet
 \item 
-Weniger Threads pro Block erm\"oglich \"Uberlappung von Speicherzugriff mit Arithmetik
+Weniger Threads pro Block erm\"oglichen mehr Arithmetik mit weniger Speicherzugriff
 \end{itemize}
 
 
@@ -321,12 +337,13 @@ Weniger Threads pro Block erm\"oglich \"Uberlappung von Speicherzugriff mit Arit
 
 
 \begin{frame}
-\frametitle{Begr\"undung der Ergebnisse und m\"ogl. Verbesserungen}
+\frametitle{M\"ogliche Verbesserungen}
 
-\begin{itemize}
-\item Vektorarithmetik (float4)
-\item Image-Objekte
-\end{itemize}
+\begin{enumerate}
+\item Vektorarithmetik (float4 als Datentyp)
+\item Matrizen als Image-Objekte
+\item Matrix \textbf{B} transponieren 
+\end{enumerate}
 
  
 \end{frame}
