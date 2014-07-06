@@ -69,9 +69,15 @@ ATIstud4_multiCM_float_B16x16_o = [4.17792e+06,8.1664e+06,1.41189e+07,2.24287e+0
 ATIstud4_multiCM_float_B16x16_t = [0.0004251,0.0003434,0.0003194,0.0004007,0.000461,0.0005812,0.0006034,0.0006326,0.0007186,0.0007769,0.0007954,0.000841,0.0023094,0.0015656,0.0016381,0.0016957,0.0017695,0.0018543,0.0022943,0.0023837,0.0042369,0.0033899,0.0035388,0.0036477,0.0038226,0.0043998,0.0045515,0.0046495,0.0374434,0.0066151,0.0068866,0.0070316,0.0079083,0.0080198,0.0083129,0.0090756,0.0158784,0.0116529,0.0120603,0.0129138,0.0134169,0.013537,0.0147538,0.0149187,0.105778,0.0188902,0.0195284,0.020454,0.0212323,0.0222142,0.0229262,0.024892,0.0491687,0.0287581,0.0296391,0.0307548,0.0317716,0.0328577,0.0338028,0.0349791,0.591352,0.0416541,0.0439547,0.0440914,0.0465782,0.0465826,0.0490329,0.0491214,0.0988158,0.0579649,0.0608179,0.0608402,0.0641589,0.0650418,0.0668207,0.0681467,0.540732,0.0800113,0.0816697,0.0829139,0.0853336,0.0864083,0.0899875,0.0899181,0.193097,0.102696,0.106825,0.108082,0.111269,0.112081,0.116429,0.118747,0.962399,0.131816,0.136724,0.139524,0.143614,0.144178,0.147646,0.148833,0.323434,0.166126,0.171883,0.172959,0.180223,0.179856,0.185934,0.187022,1.49597,0.205873,0.212581,0.213482,0.222321,0.221187,0.228277,0.229039,0.447374,0.251592,0.259307,0.259954,0.271111,0.268461,0.276592,0.277153,8.79842];
 ATIstud4_multiCM_float_B16x16_p = [9.82809e+09,2.3781e+10,4.42045e+10,5.59737e+10,7.2644e+10,8.20592e+10,1.08441e+11,1.37693e+11,1.57388e+11,1.85107e+11,2.25836e+11,2.62727e+11,1.16123e+11,2.05469e+11,2.3312e+11,2.64871e+11,2.9606e+11,3.27065e+11,3.03941e+11,3.34285e+11,2.13689e+11,3.01885e+11,3.25299e+11,3.53428e+11,3.76143e+11,3.63084e+11,3.88564e+11,4.19701e+11,5.73248e+10,3.5586e+11,3.73863e+11,3.99426e+11,3.8647e+11,4.1375e+11,4.32414e+11,4.28178e+11,2.64048e+11,3.87465e+11,4.02446e+11,4.03342e+11,4.15941e+11,4.41006e+11,4.32217e+11,4.5593e+11,6.84962e+10,4.08031e+11,4.19361e+11,4.24893e+11,4.33873e+11,4.39085e+11,4.49991e+11,4.3791e+11,2.3401e+11,4.21915e+11,4.31302e+11,4.3753e+11,4.45432e+11,4.52607e+11,4.61948e+11,4.68366e+11,2.90448e+10,4.31974e+11,4.28552e+11,4.4694e+11,4.42307e+11,4.62067e+11,4.58342e+11,4.77407e+11,2.47489e+11,4.39734e+11,4.36568e+11,4.54342e+11,4.48306e+11,4.59908e+11,4.65335e+11,4.74057e+11,6.20416e+10,4.35211e+11,4.42362e+11,4.51861e+11,4.55111e+11,4.65695e+11,4.63142e+11,4.79858e+11,2.31247e+11,4.49801e+11,4.47154e+11,4.56854e+11,4.58557e+11,4.70244e+11,4.67445e+11,4.73105e+11,6.02376e+10,4.53689e+11,4.5107e+11,4.55688e+11,4.56263e+11,4.68251e+11,4.70969e+11,4.81091e+11,2.27892e+11,4.5661e+11,4.54046e+11,4.64114e+11,4.58013e+11,4.71814e+11,4.6907e+11,4.79175e+11,6.15391e+10,4.59257e+11,4.56678e+11,4.66823e+11,4.60061e+11,4.74483e+11,4.71635e+11,4.8212e+11,2.53102e+11,4.61406e+11,4.5887e+11,4.69077e+11,4.60832e+11,4.76733e+11,4.73912e+11,4.84303e+11,1.5619e+10];
 
-length(xalot)
-length(xsmall)
-length(ATIstud4_multiRM_float_B16x16_n)
+max(ATIstud4_RMBlockUnrolled_float_B32x2_p)
+max(ATIstud4_RMunrolledBsregister_float_B32x2_p)
+max(ATIstud4_CMunrolled_float_B32x2_p)
+
+
+max(NVIstud4_RMBlockUnrolled_float_B32x2_p)
+max(NVIstud4_RMunrolledBsregister_float_B32x2_p)
+max(NVIstud4_CMunrolled_float_B32x2_p)
+
 
 
 figure % create new figure
@@ -113,11 +119,11 @@ figure % create new figure
 hold on
 plot(x,ATIstud4_RMBlockUnrolled_float_B32x2_t,'--r','LineWidth',3)
 plot(x,NVIstud4_RMBlockUnrolled_float_B32x2_t,'--g','LineWidth',3) 
-plot(x,ATIstud4_RMunrolledBsregister_float_B32x2_t,'m-.','LineWidth',3)
-plot(x,NVIstud4_RMunrolledBsregister_float_B32x2_t,'c-.','LineWidth',3) 
+%plot(x,ATIstud4_RMunrolledBsregister_float_B32x2_t,'m-.','LineWidth',3)
+%plot(x,NVIstud4_RMunrolledBsregister_float_B32x2_t,'c-.','LineWidth',3) 
 plot(x,ATIstud4_CMunrolled_float_B32x2_t,':r','LineWidth',5)
 plot(x,NVIstud4_CMunrolled_float_B32x2_t,':g','LineWidth',5) 
-l3=legend('ATI-Rowmajor ','NVI-Rowmajor ','ATI-Private','NVI-Private','ATI-Colmajor ','NVI-Colmajor '); 
+l3=legend('ATI-Rowmajor ','NVI-Rowmajor ','ATI-Colmajor ','NVI-Colmajor '); 
 set(l3,'Location','NorthWest')
 title('Stud4Time','FontSize',24) % title
 ylabel('Computational Time in (s)','FontSize',26) % label for y axis
@@ -126,17 +132,18 @@ set(gca,'FontSize',18,'FontWeight','bold')
 Ticks = 0:512:4096;
 set(gca, 'XTickMode', 'manual', 'XTick', Ticks, 'xlim', [0,4096]);
 grid on
+axis([0,4096,0,1]);
 hold off
 
 figure % create new figure 
 hold on
 plot(x,ATIstud4_RMBlockUnrolled_float_B32x2_p,'--r','LineWidth',3)
 plot(x,NVIstud4_RMBlockUnrolled_float_B32x2_p,'--g','LineWidth',3) 
-plot(x,ATIstud4_RMunrolledBsregister_float_B32x2_p,'m-.','LineWidth',3)
-plot(x,NVIstud4_RMunrolledBsregister_float_B32x2_p,'c-.','LineWidth',3) 
+%plot(x,ATIstud4_RMunrolledBsregister_float_B32x2_p,'m-.','LineWidth',3)
+%plot(x,NVIstud4_RMunrolledBsregister_float_B32x2_p,'c-.','LineWidth',3) 
 plot(x,ATIstud4_CMunrolled_float_B32x2_p,':r','LineWidth',5)
 plot(x,NVIstud4_CMunrolled_float_B32x2_p,':g','LineWidth',5) 
-l4=legend('ATI-Rowmajor ','NVI-Rowmajor ','ATI-Private','NVI-Private','ATI-Colmajor ','NVI-Colmajor '); 
+l4=legend('ATI-Rowmajor ','NVI-Rowmajor ','ATI-Colmajor ','NVI-Colmajor '); 
 set(l4,'Location','NorthWest')
 title('Stud4Performance','FontSize',24) % title
 ylabel('FLOPS','FontSize',26) % label for y axis
