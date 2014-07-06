@@ -83,8 +83,8 @@ plot(xsmall,NVIDIAstud4_multiCM_float_B16x16_t,'g:','LineWidth',3)
 l1=legend('ATI-Rowmajor ','NVI-Rowmajor ','ATI-Colmajor ','NVI-Colmajor '); 
 set(l1,'Location','NorthWest')
 title('SimpleTime','FontSize',16) % title
-ylabel('Computational Time in (s)','FontSize',18) % label for y axis
-xlabel('Dimension of square Matrices','FontSize',18) % label for x axis
+ylabel('Computational Time in (s)','FontSize',22) % label for y axis
+xlabel('Dimension of square Matrices','FontSize',22) % label for x axis
 set(gca,'FontSize',16,'FontWeight','bold')
 Ticks = 0:512:4096;
 set(gca, 'XTickMode', 'manual', 'XTick', Ticks, 'xlim', [0,4096]);
@@ -101,8 +101,8 @@ plot(xsmall,NVIDIAstud4_multiCM_float_B16x16_p,'g:','LineWidth',3)
 l2=legend('ATI-Rowmajor ','NVI-Rowmajor ','ATI-Colmajor ','NVI-Colmajor ');
 set(l2,'Location','NorthWest')
 title('SimplePerformance','FontSize',16) % title
-ylabel('FLOPS','FontSize',18) % label for y axis
-xlabel('Dimension of square Matrices','FontSize',18) % label for x axis
+ylabel('FLOPS','FontSize',22) % label for y axis
+xlabel('Dimension of square Matrices','FontSize',22) % label for x axis
 set(gca,'FontSize',16,'FontWeight','bold')
 Ticks = 0:512:4096;
 set(gca, 'XTickMode', 'manual', 'XTick', Ticks, 'xlim', [0,4096]);
@@ -117,11 +117,11 @@ plot(x,ATIstud4_RMunrolledBsregister_float_B32x2_t,'m-.','LineWidth',3)
 plot(x,NVIstud4_RMunrolledBsregister_float_B32x2_t,'c-.','LineWidth',3) 
 plot(x,ATIstud4_CMunrolled_float_B32x2_t,':r','LineWidth',3)
 plot(x,NVIstud4_CMunrolled_float_B32x2_t,':g','LineWidth',3) 
-l3=legend('ATI-Rowmajor ','NVI-Rowmajor ','ATI-private','NVI-Private','ATI-Colmajor ','NVI-Colmajor '); 
+l3=legend('ATI-Rowmajor ','NVI-Rowmajor ','ATI-Private','NVI-Private','ATI-Colmajor ','NVI-Colmajor '); 
 set(l3,'Location','NorthWest')
 title('Stud4Time','FontSize',16) % title
-ylabel('Computational Time in (s)','FontSize',18) % label for y axis
-xlabel('Dimension of square Matrices','FontSize',18) % label for x axis
+ylabel('Computational Time in (s)','FontSize',22) % label for y axis
+xlabel('Dimension of square Matrices','FontSize',22) % label for x axis
 set(gca,'FontSize',16,'FontWeight','bold')
 Ticks = 0:512:4096;
 set(gca, 'XTickMode', 'manual', 'XTick', Ticks, 'xlim', [0,4096]);
@@ -136,11 +136,11 @@ plot(x,ATIstud4_RMunrolledBsregister_float_B32x2_p,'m-.','LineWidth',3)
 plot(x,NVIstud4_RMunrolledBsregister_float_B32x2_p,'c-.','LineWidth',3) 
 plot(x,ATIstud4_CMunrolled_float_B32x2_p,':r','LineWidth',3)
 plot(x,NVIstud4_CMunrolled_float_B32x2_p,':g','LineWidth',3) 
-l4=legend('ATI-Rowmajor ','NVI-Rowmajor ','ATI-private','NVI-Private','ATI-Colmajor ','NVI-Colmajor '); 
+l4=legend('ATI-Rowmajor ','NVI-Rowmajor ','ATI-Private','NVI-Private','ATI-Colmajor ','NVI-Colmajor '); 
 set(l4,'Location','NorthWest')
 title('Stud4Performance','FontSize',16) % title
-ylabel('FLOPS','FontSize',18) % label for y axis
-xlabel('Dimension of square Matrices','FontSize',18) % label for x axis
+ylabel('FLOPS','FontSize',22) % label for y axis
+xlabel('Dimension of square Matrices','FontSize',22) % label for x axis
 set(gca,'FontSize',16,'FontWeight','bold')
 Ticks = 0:512:4096;
 set(gca, 'XTickMode', 'manual', 'XTick', Ticks, 'xlim', [0,4096]);
