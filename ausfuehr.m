@@ -64,6 +64,7 @@ plot(x,ATIstud4_multiRM_float_B16x16_t,'--r','LineWidth',3)
 plot(xsmall,NVIDIAstud4_multiRM_float_B16x16_t,'--g','LineWidth',3)
 plot(x,ATIstud4_multiCM_float_B16x16_t,'r:','LineWidth',3)
 plot(xsmall,NVIDIAstud4_multiCM_float_B16x16_t,'g:','LineWidth',3)
+legend('ATI-Rowmajor ','NVI-Rowmajor ','ATI-Colmajor ','NVI-Colmajor '); 
 title('Simple 1 loop','FontSize',16) % title
 ylabel('Computational Time in (s)','FontSize',18) % label for y axis
 xlabel('Dimension of square Matrices','FontSize',18) % label for x axis
@@ -80,6 +81,7 @@ plot(x,ATIstud4_multiRM_float_B16x16_p,'--r','LineWidth',3)
 plot(xsmall,NVIDIAstud4_multiRM_float_B16x16_p,'--g','LineWidth',3)
 plot(x,ATIstud4_multiCM_float_B16x16_p,'r:','LineWidth',3)
 plot(xsmall,NVIDIAstud4_multiCM_float_B16x16_p,'g:','LineWidth',3)
+legend('ATI-Rowmajor ','NVI-Rowmajor ','ATI-Colmajor ','NVI-Colmajor '); 
 title('Simple 1 loop','FontSize',16) % title
 ylabel('FLOPS','FontSize',16) % label for y axis
 xlabel('Dimension of square Matrices','FontSize',18) % label for x axis
@@ -97,7 +99,8 @@ plot(x,ATIstud4_RMunrolledBsregister_float_B32x2_t,'ro','LineWidth',3)
 plot(x,NVIstud4_RMunrolledBsregister_float_B32x2_t,'go','LineWidth',3) 
 plot(x,ATIstud4_CMunrolled_float_B32x2_t,':r','LineWidth',3)
 plot(x,NVIstud4_CMunrolled_float_B32x2_t,':g','LineWidth',3) 
-title('Stud4Profilepass','FontSize',16) % title
+legend('ATI-Rowmajor ','NVI-Rowmajor ','ATI-private','NVI-Private','ATI-Colmajor ','NVI-Colmajor '); 
+title('Stud4Time','FontSize',16) % title
 ylabel('Computational Time in (s)','FontSize',16) % label for y axis
 xlabel('Dimension of square Matrices','FontSize',16) % label for x axis
 set(gca,'FontSize',12,'FontWeight','bold')
@@ -106,7 +109,7 @@ set(gca, 'XTickMode', 'manual', 'XTick', Ticks, 'xlim', [0,4096]);
 grid on
 hold off
 
-figure % create new figure
+figure % create new figure 
 hold on
 plot(x,ATIstud4_RMBlockUnrolled_float_B32x2_p,'--r','LineWidth',3)
 plot(x,NVIstud4_RMBlockUnrolled_float_B32x2_p,'--g','LineWidth',3) 
@@ -114,7 +117,8 @@ plot(x,ATIstud4_RMunrolledBsregister_float_B32x2_p,'ro','LineWidth',3)
 plot(x,NVIstud4_RMunrolledBsregister_float_B32x2_p,'go','LineWidth',3) 
 plot(x,ATIstud4_CMunrolled_float_B32x2_p,':r','LineWidth',3)
 plot(x,NVIstud4_CMunrolled_float_B32x2_p,':g','LineWidth',3) 
-title('Stud4Profilepass','FontSize',16) % title
+legend('ATI-Rowmajor ','NVI-Rowmajor ','ATI-private','NVI-Private','ATI-Colmajor ','NVI-Colmajor '); 
+title('Stud4Performance','FontSize',16) % title
 ylabel('FLOPS','FontSize',16) % label for y axis
 xlabel('Dimension of square Matrices','FontSize',16) % label for x axis
 set(gca,'FontSize',12,'FontWeight','bold')
