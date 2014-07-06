@@ -82,7 +82,7 @@ plot(xalot,ATIstud4_multiCM_float_B16x16_t,'r:','LineWidth',3)
 plot(xsmall,NVIDIAstud4_multiCM_float_B16x16_t,'g:','LineWidth',3)
 l1=legend('ATI-Rowmajor ','NVI-Rowmajor ','ATI-Colmajor ','NVI-Colmajor '); 
 set(l1,'Location','NorthWest')
-title('Simple 1 loop','FontSize',16) % title
+title('SimpleTime','FontSize',16) % title
 ylabel('Computational Time in (s)','FontSize',18) % label for y axis
 xlabel('Dimension of square Matrices','FontSize',18) % label for x axis
 set(gca,'FontSize',16,'FontWeight','bold')
@@ -100,7 +100,7 @@ plot(xalot,ATIstud4_multiCM_float_B16x16_p,'r:','LineWidth',3)
 plot(xsmall,NVIDIAstud4_multiCM_float_B16x16_p,'g:','LineWidth',3)
 l2=legend('ATI-Rowmajor ','NVI-Rowmajor ','ATI-Colmajor ','NVI-Colmajor ');
 set(l2,'Location','NorthWest')
-title('Simple 1 loop','FontSize',16) % title
+title('SimplePerformance','FontSize',16) % title
 ylabel('FLOPS','FontSize',18) % label for y axis
 xlabel('Dimension of square Matrices','FontSize',18) % label for x axis
 set(gca,'FontSize',16,'FontWeight','bold')

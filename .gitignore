@@ -36,3 +36,10 @@ Icon
 .Spotlight-V100
 .Trashes
 
+*.aux
+*.aux
+*.log
+*.nav
+*.ptp
+*.gz
+*.toc
